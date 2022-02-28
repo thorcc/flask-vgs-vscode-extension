@@ -11,6 +11,7 @@ Ved kjøring av `Create Flask` kopieres malen `https://github.com/thorcc/flask-i
 ## Dette trenger du:
 
 - Python (3.x.x)
+- [Node](https://nodejs.org/en/)
 - Git
   - [Git (mac)](https://sourceforge.net/projects/git-osx-installer/)
   - [Git (windows)](https://git-scm.com/download/windows)
