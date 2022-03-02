@@ -3,6 +3,11 @@
 const vscode = require("vscode");
 const process = require("process");
 const fs = require('fs')
+const util = require('util');
+
+const makeDir = util.promisify(fs.mkdir);
+const writeFile = util.promisify(fs.writeFile);
+
 
 
 const htmlTemplate = `<!DOCTYPE html>
@@ -53,10 +58,10 @@ function activate(context) {
       });
 
       // Create Flask template
-      await fs.mkdir(`${uri.fsPath}/templates`, err => console.log(err));
-      await fs.writeFile(`${uri.fsPath}/templates/index.html`, htmlTemplate ,err => console.log(err));
-      await fs.writeFile(`${uri.fsPath}/app.py`, appTemplate ,err => console.log(err));
-      await fs.writeFile(`${uri.fsPath}/requirements.txt`, requirementsTemplate ,err => console.log(err));
+      await makeDir(`${uri.fsPath}/templates`);
+      await writeFile(`${uri.fsPath}/templates/index.html`, htmlTemplate);
+      await writeFile(`${uri.fsPath}/app.py`, appTemplate);
+      await writeFile(`${uri.fsPath}/requirements.txt`, requirementsTemplate);
       
       // Create virtual environment
       const terminal = vscode.window.createTerminal("flask-terminal");
