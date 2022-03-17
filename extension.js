@@ -79,6 +79,8 @@ function activate(context) {
       terminal.sendText("pip install -r requirements.txt");
 
       // Run Flask
+      terminal.sendText("export FLASK_APP=app.py")
+      terminal.sendText("export FLASK_ENV=development")
       terminal.sendText("flask run");
     }
   );
@@ -94,8 +96,12 @@ function activate(context) {
       terminal.sendText(`cd "${uri.fsPath}"`);
       if (process.platform == "win32") {
         terminal.sendText("venv\\Scripts\\activate");
+        terminal.sendText("set FLASK_APP=app.py")
+        terminal.sendText("set FLASK_ENV=development")
       } else {
         terminal.sendText(". venv/bin/activate");
+        terminal.sendText("export FLASK_APP=app.py")
+        terminal.sendText("export FLASK_ENV=development")
       }
 
       // Run Flask
