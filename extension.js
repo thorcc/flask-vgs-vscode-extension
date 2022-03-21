@@ -47,6 +47,12 @@ MarkupSafe==2.1.0
 requests==2.27.1
 urllib3==1.26.9
 Werkzeug==2.0.3
+python-dotenv==0.19.2
+
+`
+
+const flaskenvTemplate = `FLASK_APP=app
+FLASK_ENV=development
 
 `
 
@@ -68,6 +74,7 @@ function activate(context) {
       await writeFile(`${uri.fsPath}/templates/index.html`, htmlTemplate);
       await writeFile(`${uri.fsPath}/app.py`, appTemplate);
       await writeFile(`${uri.fsPath}/requirements.txt`, requirementsTemplate);
+      await writeFile(`${uri.fsPath}/.flaskenv`, flaskenvTemplate);
       
       // Create virtual environment
       const terminal = vscode.window.createTerminal("flask-terminal");
@@ -85,8 +92,6 @@ function activate(context) {
       terminal.sendText("pip install -r requirements.txt");
 
       // Run Flask
-      terminal.sendText("export FLASK_APP=app.py")
-      terminal.sendText("export FLASK_ENV=development")
       terminal.sendText("flask run");
     }
   );
@@ -102,12 +107,8 @@ function activate(context) {
       terminal.sendText(`cd "${uri.fsPath}"`);
       if (process.platform == "win32") {
         terminal.sendText("venv\\Scripts\\activate");
-        terminal.sendText("set FLASK_APP=app.py")
-        terminal.sendText("set FLASK_ENV=development")
       } else {
         terminal.sendText(". venv/bin/activate");
-        terminal.sendText("export FLASK_APP=app.py")
-        terminal.sendText("export FLASK_ENV=development")
       }
 
       // Run Flask
