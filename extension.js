@@ -11,7 +11,7 @@ const writeFile = util.promisify(fs.writeFile);
 
 
 const htmlTemplate = `<!DOCTYPE html>
-<html lang="en">
+<html lang="no">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,7 +30,7 @@ const appTemplate = `from flask import Flask, render_template
 app = Flask(__name__)
 
 @app.route("/")
-def hello_world():
+def index():
     navn = "Sandvika"
     return render_template("index.html", navn=navn)
 
